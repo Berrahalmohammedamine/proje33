@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        background-image: url("image/14b00e3e-48a8-4e7c-9958-e6fb6475b074.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        font-family: Arial, sans-serif;
+        overflow-y: auto;
+      }
+
+      nav {
+        background-color: #6c5ce7;
+        position: absolute;
+        top: 15px;
+        left: 110px;
+        right: 1px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        width: 1000px;
+        z-index: 1000;
+      }
+      .nav:hover {
+        transform: scale(1.15);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(145deg, #a29bfe, #6c5ce7);
+      }
+      .nav-left,
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+      }
+
+      .logo img {
+        width: 160px;
+        height: 170px;
+        margin-top: 5px;
+        margin-right: -34px;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 19px;
+        font-weight: bold;
+        padding: 0px 40px;
+      }
+
+      nav ul li a:hover {
+        color: rgb(0, 0, 0);
+      }
+
+      /* 🔹 حاوية البروفايل */
+      .profile-container {
+        position: relative;
+        display: inline-block;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      /* 🔹 زر البروفايل */
+      .profile-btn {
+        background: linear-gradient(145deg, #6c5ce7, #a29bfe);
+        border: none;
+        margin-top: 15%;
+        padding: 35px;
+        margin-left: 15px;
+        font-size: 22px;
+        cursor: pointer;
+        color: #fff;
+        width: 55px;
+        height: 5px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s ease, box-shadow 0.2s ease,
+          background 0.3s ease;
+      }
+
+      .profile-btn:hover {
+        transform: scale(1.15);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(145deg, #a29bfe, #6c5ce7);
+      }
+
+      /* 🔹 القائمة المنسدلة */
+      .profile-menu {
+        display: none;
+        position: absolute;
+        top: 65px;
+        right: -230;
+        width: 240px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+        padding: 80px;
+        z-index: 1000;
+        animation: fadeIn 0.3s ease forwards;
+      }
+
+      .profile-menu.show {
+        display: block;
+      }
+
+      /* صورة البروفايل داخل القائمة */
+      .profile-image {
+        text-align: center;
+        margin-bottom: 15px;
+      }
+
+      .profile-image img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #6c5ce7;
+        transition: transform 0.3s ease;
+      }
+
+      .profile-image img:hover {
+        transform: scale(1.1);
+      }
+
+      /* معلومات البائع */
+      .seller-info {
+        text-align: center;
+        margin-bottom: 15px;
+      }
+
+      .seller-info p {
+        margin: 4px 0;
+        font-weight: 600;
+        color: #2d3436;
+        font-size: 15px;
+      }
+
+      /* روابط القائمة */
+      .profile-container {
+        position: relative;
+      }
+      .profile-btn {
+        background: linear-gradient(145deg, #6c5ce7, #a29bfe);
+        border: none;
+        font-size: 22px;
+        color: #fff;
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+      }
+      .profile-btn:hover {
+        transform: scale(1.15);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(145deg, #a29bfe, #6c5ce7);
+      }
+      .profile-menu {
+        display: none;
+        position: absolute;
+        top: 65px;
+        left: 0;
+        width: 240px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+        padding: 20px;
+      }
+      .profile-menu.show {
+        display: block;
+      }
+      .profile-image {
+        text-align: center;
+        margin-bottom: 15px;
+      }
+
+      .profile-image img {
+        width: 80px;
+        height: 80px;
+        margin: auto;
+        border-radius: 50%;
+        border: 3px solid #6c5ce7;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s ease;
+      }
+
+      .profile-image img:hover {
+        transform: scale(1.1);
+      }
+
+      .seller-info {
+        text-align: center;
+        margin-bottom: 15px;
+      }
+      .seller-info p {
+        margin: 4px 0;
+        font-weight: 600;
+        font-size: 15px;
+        color: #2d3436;
+      }
+      .profile-menu a {
+        display: flex;
+        align-items: center;
+        padding: 15px 12px;
+        margin: 5px 0;
+        text-decoration: none;
+        color: #636e72;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: 0.3s;
+      }
+      .profile-menu a:hover {
+        background: #6c5ce7;
+        color: #fff;
+      }
+      .profile-menu a i {
+        margin-right: 10px;
+      }
+      .profile-menuu a {
+        display: flex;
+        align-items: center;
+        padding: 15px 12px;
+        margin: 5px 0;
+        text-decoration: none;
+        color: red;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: 0.3s;
+      }
+      .profile-menuua a:hover {
+        background: #6c5ce7;
+        color: #fff;
+      }
+      .profile-menuu a i {
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+    </style>
+  </head>
+  <body>
+    <div class="profile-container">
+      <!-- زر أيقونة البروفايل -->
+     <button id="profile-btn" class="profile-btn">
+        <i class="fas fa-user"></i>
+      </button>
+
+      <!-- القائمة المنسدلة -->
+      <div id="profile-menu" class="profile-menu">
+        <!-- صورة البائع -->
+        <div class="profile-image">
+          <img id="seller-pic" src="image/default-avatar.png" />
+        </div>
+
+        <!-- معلومات البائع -->
+        <div class="seller-info">
+          <p id="full-name">Full Name</p>
+          <p id="gmail">example@gmail.com</p>
+        </div>
+
+        <!-- روابط -->
+        <a href="admin.html">My Requests</a>
+        <div class="profile-menuu">
+          <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">My requests </a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">About Us</a></li>
+      </ul>
+
+       
+      </div>
+    </nav>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const profileBtn = document.getElementById("profile-btn");
+        const profileMenu = document.getElementById("profile-menu");
+
+        profileBtn.addEventListener("click", () => {
+          profileMenu.classList.toggle("show");
+
+          // جلب بيانات المستخدم من السيرفر
+          fetch("/user-data")
+            .then((res) => {
+              if (!res.ok) throw new Error("غير متصل");
+              return res.json();
+            })
+            .then((user) => {
+              document.getElementById("full-name").textContent = user.username;
+              document.getElementById("gmail").textContent = user.email;
+              document.getElementById("seller-pic").src =
+                user.profilePic || "image/default-avatar.png";
+            })
+            .catch((err) => {
+              console.error("خطأ:", err);
+              document.getElementById("full-name").textContent = "زائر";
+              document.getElementById("gmail").textContent = "غير متصل";
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

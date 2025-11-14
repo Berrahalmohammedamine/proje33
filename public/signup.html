@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+
+    <!-- Font Awesome للأيقونات -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      /* إعداد الصفحة العامة */
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        font-family: "Poppins", Arial, sans-serif;
+        background-color: #f3f3f7;
+      }
+
+      /* النصف الأيسر: الصورة */
+      .left {
+        width: 50%;
+
+        background-size: cover;
+        background-position: center;
+      }
+
+      /* النصف الأيمن: النموذج */
+      .right {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f3f3f7;
+      }
+
+      /* حاوية النموذج */
+      .login {
+        width: 400px;
+        background: #fff;
+        border-radius: 20px;
+        padding: 50px 40px;
+        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      /* العنوان */
+      h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #3a2f5b;
+        font-weight: 600;
+      }
+
+      .input-with-icon {
+        position: relative;
+        margin-bottom: 20px;
+      }
+
+      .input-with-icon i {
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        transform: translateY(-50%);
+        color: #444;
+        font-size: 18px;
+      }
+
+      .input-with-icon input,
+      .input-with-icon select {
+        width: 85%;
+        padding: 12px 15px 12px 45px;
+        border-radius: 25px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+        outline: none;
+        transition: 0.3s;
+        background-color: #f9f9f9;
+      }
+
+      .input-with-icon input:focus {
+        border-color: rgb(171, 141, 235);
+        box-shadow: 0 0 5px rgb(171, 141, 235);
+      }
+      .input-with-iconn {
+        position: relative;
+        margin-bottom: 20px;
+      }
+
+      .input-with-iconn i {
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        transform: translateY(-50%);
+        color: #444;
+        font-size: 18px;
+      }
+
+      .input-with-iconn input,
+      .input-with-iconn select {
+        width: 100%;
+        padding: 12px 15px 12px 45px;
+        border-radius: 25px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+        outline: none;
+        transition: 0.3s;
+        background-color: #f9f9f9;
+      }
+
+      .input-with-iconn input:focus {
+        border-color: rgb(171, 141, 235);
+        box-shadow: 0 0 5px rgb(171, 141, 235);
+      }
+      /* زر Google */
+      .google-btn {
+        width: 100%;
+        background-color: #fff;
+        color: #444;
+        border: 1px solid #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-size: 15px;
+        font-weight: 500;
+        padding: 12px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-bottom: 15px;
+      }
+
+      .google-btn img {
+        width: 22px;
+        height: 22px;
+      }
+
+      .google-btn:hover {
+        background-color: #f5f5f5;
+        border-color: #bbb;
+      }
+
+      /* زر التسجيل */
+      .button1 {
+        padding: 12px;
+        border: none;
+        background-color: #8d74c5;
+        color: white;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        width: 100%;
+        transition: 0.3s;
+        font-size: 16px;
+      }
+
+      .button1:hover {
+        background-color: #5d4b88;
+      }
+
+      /* رابط تسجيل الدخول */
+      .login-link {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .login-link:hover {
+        text-decoration: underline;
+        color: #5d4b88;
+      }
+
+      /* تحسين العرض على الهاتف */
+      @media (max-width: 768px) {
+        body {
+          flex-direction: column;
+        }
+
+        .left {
+          display: none;
+        }
+
+        .right {
+          width: 100%;
+          background-color: #fff;
+        }
+
+        .login {
+          width: 90%;
+          padding: 40px 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- قسم الصورة -->
+    <div class="left">
+      <img
+        src="../image/chatgpt.png.png"
+        alt="background"
+        style="width: 100%; height: 100%; object-fit: cover"
+      />
+    </div>
+
+    <!-- قسم النموذج -->
+    <div class="right">
+      <div class="login">
+        <h2>Create Account</h2>
+
+        <form id="signupForm">
+          <div class="input-with-icon">
+            <i class="fas fa-user"></i>
+            <input
+              type="text"
+              name="username"
+              placeholder="Full Name"
+              required
+            />
+          </div>
+
+          <div class="input-with-iconn">
+            <i class="fas fa-venus-mars"></i>
+            <select name="sex" required>
+              <option value="" disabled selected>Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+
+          <div class="input-with-iconn">
+            <i class="fas fa-briefcase"></i>
+            <select name="category" required>
+              <option value="" disabled selected hidden>Choose Category</option>
+              <option value="client">Client</option>
+              <option value="provider">Service Provider</option>
+            </select>
+          </div>
+
+          <div class="input-with-icon">
+            <i class="fas fa-envelope"></i>
+            <input type="email" name="email" placeholder="Email" required />
+          </div>
+
+          <div class="input-with-icon">
+            <i class="fas fa-lock"></i>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+            />
+          </div>
+
+          <div class="input-with-icon">
+            <i class="fas fa-lock"></i>
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              required
+            />
+          </div>
+
+          <button type="button" class="google-btn">
+            <img
+              src="https://www.svgrepo.com/show/355037/google.svg"
+              alt="Google logo"
+            />
+            <span>Sign up with Google</span>
+          </button>
+
+          <button type="submit" class="button1">Sign Up</button>
+
+          <a href="login.html" class="login-link">
+            Already have an account? Login
+          </a>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("signupForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const formData = new FormData(e.target);
+          const data = Object.fromEntries(formData.entries());
+
+          const response = await fetch("http://localhost:3000/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+
+          const result = await response.json();
+          alert(result.message);
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profil</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <style>
+      /* --- Réinitialisation et CSS commun --- */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+        display: flex;
+        height: 100vh;
+        background-color: #f9f8fe;
+        color: #333;
+      }
+
+      .sidebar {
+        width: 250px;
+        background-color: #ffffff;
+        padding: 30px 20px;
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid #eee;
+      }
+
+      .sidebar-nav {
+        list-style: none;
+        width: 100%;
+      }
+
+      .sidebar-nav li {
+        margin-bottom: 20px;
+      }
+
+      .sidebar-nav a {
+        display: block;
+        background-color: #9b86d4;
+        color: white;
+        padding: 60px;
+        text-decoration: none;
+        border-radius: 15px;
+        text-align: center;
+        font-size: 2.2rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .sidebar-nav a:hover {
+        background-color: #7b5aa6;
+      }
+
+      .main-content {
+        flex-grow: 1;
+        padding: 40px;
+        overflow-y: auto;
+      }
+
+      /* --- CSS Spécifique à CETTE Page (Profil) --- */
+      .profile-page {
+        display: flex;
+        gap: 40px;
+      }
+
+      .profile-form {
+        flex: 2;
+      }
+
+      .profile-pic-container {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 30px auto;
+      }
+
+      .profile-pic {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid white;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .profile-pic-upload {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        background-color: #fff;
+        color: #7b5aa6;
+        border-radius: 50%;
+        width: 35px;
+        height: 50px;
+        display: grid;
+        place-items: center;
+        border: 1px solid #eee;
+        cursor: pointer;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 16px;
+        border: 2px solid #9b86d4;
+        border-radius: 10px;
+        font-size: 1rem;
+        background-color: #fff;
+      }
+
+      .profile-preview {
+        flex: 1;
+      }
+
+      .profile-preview h3 {
+        color: #777;
+        font-weight: 500;
+        margin-bottom: 15px;
+      }
+
+      .preview-card {
+        background-color: #e8e4f3;
+        border-radius: 15px;
+        padding: 20px;
+      }
+
+      .preview-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 20px;
+      }
+
+      .placeholder-line {
+        height: 18px;
+        background-color: #c9bfdf;
+        border-radius: 6px;
+        margin-bottom: 12px;
+      }
+      .placeholder-line.short {
+        width: 60%;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="sidebar">
+      <ul class="sidebar-nav">
+        <li>
+          <a href="#"><i class="fa-solid fa-house"></i></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa-solid fa-clock"></i></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa-solid fa-bell"></i></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa-solid fa-gear"></i></a>
+        </li>
+      </ul>
+    </nav>
+
+    <main class="main-content profile-page">
+      <div class="profile-form">
+        <div class="profile-pic-container">
+          <img src="../image/6046223645715139534.jpg" class="profile-pic" />
+          <div class="profile-pic-upload">
+            <i class="fa-solid fa-camera"></i>
+          </div>
+        </div>
+        <form>
+          <div class="form-group">
+            <input type="text" placeholder="Full Name" />
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Usr Name" />
+          </div>
+          <div class="form-group"><input type="text" placeholder="Sex" /></div>
+          <div class="form-group">
+            <input type="text" placeholder="Numero" />
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Email" />
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Your job" />
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="specialty" />
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Password" />
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Confirm Password" />
+          </div>
+          <div class="form-group">
+            <textarea placeholder="Bio" rows="3"></textarea>
+          </div>
+        </form>
+      </div>
+
+      <div class="profile-preview">
+        <h3>how the can see you .</h3>
+        <div class="preview-card">
+          <img
+            src="https://via.placeholder.com/300x200"
+            alt="Aperçu de la caméra"
+          />
+          <div class="placeholder-line"></div>
+          <div class="placeholder-line short"></div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
