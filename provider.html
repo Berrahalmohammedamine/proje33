@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Categories Page</title>
+
+    <!-- Font Awesome للأيقونات -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      /* إعدادات عامة */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #fafafa;
+      }
+
+      /* الهيدر */
+      #heder {
+        width: 100%;
+      }
+
+      /* صورة الغلاف */
+      .image-switch-card {
+        width: 98.5%;
+        height: 60vh;
+        margin: 30px auto;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .image-switch-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* أقسام الكاتيجوري */
+      .bottom-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 30px;
+        padding: 0px 0px;
+        width: 100%;
+        
+      }
+
+      .card-box {
+        position: relative;
+        width: 460px;
+        height: 300px;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+
+      .card-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+       
+      
+      }
+
+      .card-box:hover img {
+        transform: scale(1.1);
+      }
+
+      .card-box:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      }
+
+      /* زر التراكب */
+      .overlay-button {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        letter-spacing: 1px;
+        transition: background 0.3s ease;
+      }
+
+      .overlay-button:hover {
+        background: #f9c74f;
+        color: #000;
+      }
+
+      /* الفوتر */
+      footer {
+        background-color: #7e7e7e;
+        color: #fff;
+        padding: 40px 0 20px;
+        margin-top: 80px;
+        font-family: Arial, sans-serif;
+      }
+
+      .footer-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        padding: 0 40px;
+      }
+
+      .footer-section {
+        max-width: 300px;
+        margin-bottom: 20px;
+      }
+
+      .footer-section h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #391940;
+      }
+
+      .footer-section p {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .social-icons a {
+        color: #fff;
+        margin-right: 15px;
+        font-size: 20px;
+        transition: color 0.3s ease;
+      }
+
+      .social-icons a:hover {
+        color: #f9c74f;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 13px;
+        color: #aaa;
+      }
+
+      /* جعل الصفحة متجاوبة */
+      @media (max-width: 768px) {
+        .card-box {
+          width: 90%;
+          height: 220px;
+        }
+
+        .image-switch-card {
+          height: 40vh;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- مكان الهيدر -->
+    <div id="heder"></div>
+
+    <!-- تحميل الهيدر -->
+    <script>
+      fetch("heder.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("heder").innerHTML = data;
+
+          // تعريف عناصر البروفايل بعد تحميل الهيدر
+          const profileBtn = document.getElementById("profile-btn");
+          const profileMenu = document.getElementById("profile-menu");
+
+          if (profileBtn && profileMenu) {
+            profileBtn.addEventListener("click", () => {
+              profileMenu.classList.toggle("show");
+            });
+
+            window.addEventListener("click", (e) => {
+              if (
+                !profileBtn.contains(e.target) &&
+                !profileMenu.contains(e.target)
+              ) {
+                profileMenu.classList.remove("show");
+              }
+            });
+          }
+
+          // تحميل بيانات المستخدم
+          const userId = localStorage.getItem("userId");
+          if (userId) {
+            fetch(`/api/seller/${userId}`)
+              .then((res) => res.json())
+              .then((data) => {
+                document.getElementById("seller-pic").src =
+                  data.profileImage ||
+                  "../image/";
+                document.getElementById("full-name").innerText = data.username;
+                document.getElementById("gmail").innerText = data.email;
+              })
+              .catch((err) => console.error(err));
+          }
+        })
+        .catch((error) =>
+          console.error("Erreur lors du chargement du header:", error)
+        );
+    </script>
+
+    
+    <div class="image-switch-card">
+      <img id="switchImage" src="../image/Estetoscópio _ Medical school life, Nursing motivation, Nursing school motivation.jpg" alt="Image principale" />
+    </div>
+
+    
+    <section class="bottom-gallery">
+      <a href="category.html?category=Games" class="image-link">
+        <div class="card-box">
+          <img src="../image/undefined.jpg">GAMES</button>
+        </div>
+      </a>
+
+      <a href="category.html?category=Sports" class="image-link">
+        <div class="card-box">
+          <img src="../image/98a9dce0-ee93-4020-bec7-07dcc42be613.jpg" alt="Sports" />
+          <button class="overlay-button">SPORTS</button>
+        </div>
+      </a>
+
+      <a href="category.html?category=Cosmetics" class="image-link">
+        <div class="card-box">
+          <img src="../image/Lost In Translation.jpg" alt="Cosmetics" />
+          <button class="overlay-button">COSMETICS</button>
+        </div>
+      </a>
+
+      <a href="category.html?category=Tools" class="image-link">
+        <div class="card-box">
+          <img src="../image/ABOGADA.jpg" alt="Tools" />
+          <button class="overlay-button">TOOLS</button>
+        </div>
+      </a>
+
+      <a href="category.html?category=Cars" class="image-link">
+        <div class="card-box">
+          <img src="../image/d271d1d0-fb1a-4662-bcc8-98e6ca112713.jpg" alt="Cars" />
+          <button class="overlay-button">CARS</button>
+        </div>
+      </a>
+
+      <a href="category.html?category=Furniture" class="image-link">
+        <div class="card-box">
+          <img src="../image/20cbb71b-fab6-4e34-b3bf-e22ea0a33a21.jpg" alt="Furniture" />
+          <button class="overlay-button">FURNITURE</button>
+        </div>
+      </a>
+
+      <a href="category.html?category=RealEstate" class="image-link">
+        <div class="card-box">
+          <img src="../image/How to Troubleshoot Common Electrical Circuit….jpg" alt="Real Estate" />
+          <button class="overlay-button">REAL ESTATE</button>
+        </div>
+      </a>
+
+      <a href="category.html?category=Handicrafts" class="image-link">
+        <div class="card-box">
+          <img src="../image/0c32cb14-b75e-4b90-ac01-acc7f5fbd328.jpg" alt="Handicrafts" />
+          <button class="overlay-button">HANDICRAFTS</button>
+        </div>
+      </a>
+
+      <a href="category.html?category=Music" class="image-link">
+        <div class="card-box">
+          <img src="../image/Plumber tool's.jpg" alt="Music" />
+          <button class="overlay-button">MUSIC</button>
+        </div>
+      </a>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>About Us</h3>
+          <p>
+            We provide a platform that connects sellers and customers easily,
+            offering high-quality products in various categories.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <p>Email: support@example.com</p>
+          <p>Phone: +213 555 555 555</p>
+        </div>
+        <div class="footer-section">
+          <h3>Follow Us</h3>
+          jpg<div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2025 All rights reserved | Developed by Berrahal Mohammed Amine
+      </div>
+    </footer>
+  </body>
+</html>
