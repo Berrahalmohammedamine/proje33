@@ -1,14 +1,41 @@
 const mongoose = require("mongoose");
 
+// Définition du schéma utilisateur
 const userSchema = new mongoose.Schema(
   {
-    username: { type: String, required: true, trim: true },
-    sex: { type: String, enum: ["male", "female"], required: true },
-    category: { type: String, enum: ["client", "provider"], required: true },
-    email: { type: String, required: true, unique: true, lowercase: true },
-    password: { type: String, required: true },
+    username: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    sex: {
+      type: String,
+      required: true,
+      enum: ["male", "female", "other"], // Ajuste selon tes besoins
+    },
+    category: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
   },
-  { timestamps: true }
+  {
+    timestamps: true, // Ajoute createdAt et updatedAt
+  }
 );
 
-module.exports = mongoose.model("User", userSchema);
+// Création du modèle
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;
