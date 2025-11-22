@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Categories Page</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Font Awesome للأيقونات -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+ 
+  </head>
+
+  <body>
+    <!-- مكان الهيدر -->
+    <div id="heder">
+      
+    </div>
+
+    <!-- تحميل الهيدر -->
+    <script>
+      fetch("heder.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("heder").innerHTML = data;
+
+          // تعريف عناصر البروفايل بعد تحميل الهيدر
+          const profileBtn = document.getElementById("profile-btn");
+          const profileMenu = document.getElementById("profile-menu");
+
+          if (profileBtn && profileMenu) {
+            profileBtn.addEventListener("click", () => {
+              profileMenu.classList.toggle("show");
+            });
+
+            window.addEventListener("click", (e) => {
+              if (
+                !profileBtn.contains(e.target) &&
+                !profileMenu.contains(e.target)
+              ) {
+                profileMenu.classList.remove("show");
+              }
+            });
+          }
+localStorage.setItem('userId', '69210713cce3c3420020bbdc');
+          const userId = localStorage.getItem("userId");
+          if (userId) {
+            fetch(`/api/seller/${userId}`)
+              .then((res) => res.json())
+              .then((data) => {
+                document.getElementById("seller-pic").src =
+                  data.profilePic ||
+                  "../image/user.png";
+                document.getElementById("full-name").innerText = data.username;
+                document.getElementById("gmail").innerText = data.email;
+              })
+              .catch((err) => console.error(err));
+          }
+        })
+        .catch((error) =>
+          console.error("Erreur lors du chargement du header:", error)
+        );
+    </script>
+
+    
+    <div class="image-switch-card">
+      <img id="switchImage" src="../image/Estetoscópio _ Medical school life, Nursing motivation, Nursing school motivation.jpg" alt="Image principale" />
+    </div>
+
+    
+    <section class="bottom-gallery">
+      <a href="category.html?category=Games" class="image-link">
+        <div class="card-box">
+          <img src="../image/undefined.jpg">GAMES</button>
+        </div>
+      </a>
+
+      <a href="category.html?category=Sports" class="image-link">
+        <div class="card-box">
+          <img src="../image/98a9dce0-ee93-4020-bec7-07dcc42be613.jpg" alt="Sports" />
+          <button class="overlay-button">SPORTS</button>
+        </div>
+      </a>
+
+      <a href="category.html?category=Cosmetics" class="image-link">
+        <div class="card-box">
+          <img src="../image/Lost In Translation.jpg" alt="Cosmetics" />
+          <button class="overlay-button">COSMETICS</button>
+        </div>
+      </a>
+
+      <a href="category.html?category=Tools" class="image-link">
+        <div class="card-box">
+          <img src="../image/ABOGADA.jpg" alt="Tools" />
+          <button class="overlay-button">TOOLS</button>
+        </div>
+      </a>
+
+      <a href="category.html?category=Cars" class="image-link">
+        <div class="card-box">
+          <img src="../image/d271d1d0-fb1a-4662-bcc8-98e6ca112713.jpg" alt="Cars" />
+          <button class="overlay-button">CARS</button>
+        </div>
+      </a>
+
+      <a href="category.html?category=Furniture" class="image-link">
+        <div class="card-box">
+          <img src="../image/20cbb71b-fab6-4e34-b3bf-e22ea0a33a21.jpg" alt="Furniture" />
+          <button class="overlay-button">FURNITURE</button>
+        </div>
+      </a>
+
+      <a href="category.html?category=RealEstate" class="image-link">
+        <div class="card-box">
+          <img src="../image/How to Troubleshoot Common Electrical Circuit….jpg" alt="Real Estate" />
+          <button class="overlay-button">REAL ESTATE</button>
+        </div>
+      </a>
+
+      <a href="category.html?category=Handicrafts" class="image-link">
+        <div class="card-box">
+          <img src="../image/0c32cb14-b75e-4b90-ac01-acc7f5fbd328.jpg" alt="Handicrafts" />
+          <button class="overlay-button">HANDICRAFTS</button>
+        </div>
+      </a>
+
+      <a href="category.html?category=Music" class="image-link">
+        <div class="card-box">
+          <img src="../image/Plumber tool's.jpg" alt="Music" />
+          <button class="overlay-button">MUSIC</button>
+        </div>
+      </a>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>About Us</h3>
+          <p>
+            We provide a platform that connects sellers and customers easily,
+            offering high-quality products in various categories.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <p>Email: support@example.com</p>
+          <p>Phone: +213 555 555 555</p>
+        </div>
+        <div class="footer-section">
+          <h3>Follow Us</h3>
+          jpg<div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2025 All rights reserved | Developed by Berrahal Mohammed Amine
+      </div>
+    </footer>
+  </body>
+</html>

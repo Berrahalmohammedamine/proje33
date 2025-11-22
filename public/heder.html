@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+      body {
+        margin: 0;
+        background-image: url("image/14b00e3e-48a8-4e7c-9958-e6fb6475b074.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        font-family: Arial, sans-serif;
+        overflow-y: auto;
+        color: #fff; /* Improved text visibility on background */
+      }
+
+      nav {
+        background-color: #6c5ce7;
+        position: fixed; /* Changed to fixed for better sticky behavior */
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px; /* Adjusted padding for responsiveness */
+        width: calc(100% - 40px); /* Full width minus padding */
+        max-width: 1200px; /* Max width for larger screens */
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      nav:hover {
+        transform: translateX(-50%) scale(1.001); /* Subtle scale on hover */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        
+      }
+
+      .nav-left,
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 20px; /* Reduced gap for better mobile fit */
+      }
+
+      .logo img {
+        width: 50px; /* Smaller logo for responsiveness */
+        height: auto;
+        margin-top: 0;
+        margin-right: 0;
+        border-radius: 50%;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+        flex-wrap: wrap; /* Allow wrapping on small screens */
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 18px; /* Slightly smaller for mobile */
+        font-weight: bold;
+        padding: 10px 20px; /* Adjusted padding */
+        transition: color 0.3s ease, background 0.3s ease;
+      }
+
+      nav ul li a:hover {
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.2); /* Subtle hover background */
+        border-radius: 5px;
+      }
+
+      /* Profile Container */
+      .profile-container {
+        position: relative;
+        display: inline-block;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      /* Profile Button */
+      .profile-btn {
+        background: linear-gradient(145deg, #6c5ce7, #a29bfe);
+        border: none;
+        font-size: 22px;
+        color: #fff;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      }
+
+      .profile-btn:hover {
+        transform: scale(1.15);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(145deg, #a29bfe, #6c5ce7);
+      }
+
+      /* Profile Menu */
+      .profile-menu {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 0; /* Aligned to right for better positioning */
+        width: 240px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+        padding: 20px;
+        z-index: 1000;
+        animation: fadeIn 0.3s ease forwards;
+      }
+
+      .profile-menu.show {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Profile Image */
+      .profile-image {
+        text-align: center;
+        margin-bottom: 15px;
+      }
+
+      .profile-image img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #6c5ce7;
+        transition: transform 0.3s ease;
+      }
+
+      .profile-image img:hover {
+        transform: scale(1.1);
+      }
+
+      /* Seller Info */
+      .seller-info {
+        text-align: center;
+        margin-bottom: 15px;
+      }
+
+      .seller-info p {
+        margin: 4px 0;
+        font-weight: 600;
+        color: #2d3436;
+        font-size: 15px;
+      }
+
+      /* Menu Links */
+      .profile-menu a {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        margin: 5px 0;
+        text-decoration: none;
+        color: #636e72;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+
+      .profile-menu a:hover {
+        background: #6c5ce7;
+        color: #fff;
+      }
+
+      .profile-menu a i {
+        margin-right: 10px;
+      }
+
+      .profile-menu .logout a {
+        color: red;
+      }
+
+      .profile-menu .logout a:hover {
+        background: #6c5ce7;
+        color: #fff;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        nav {
+          padding: 10px;
+          width: calc(100% - 20px);
+        }
+
+        nav ul li a {
+          font-size: 16px;
+          padding: 10px 15px;
+        }
+
+        .logo img {
+          width: 80px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        nav {
+          flex-direction: column; /* Stack elements on mobile */
+          align-items: flex-start;
+          padding: 15px;
+          top: 0;
+          border-radius: 0 0 10px 10px;
+        }
+
+        .nav-left, .nav-right {
+          gap: 10px;
+          width: 100%;
+          justify-content: center;
+        }
+
+        nav ul {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        nav ul li {
+          width: 100%;
+          text-align: center;
+        }
+
+        nav ul li a {
+          padding: 15px;
+          font-size: 18px;
+        }
+
+        .profile-btn {
+          margin: 10px auto;
+        }
+
+        .profile-menu {
+          width: 100%;
+          max-width: 300px;
+          right: auto;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .profile-btn {
+          width: 40px;
+          height: 40px;
+          font-size: 18px;
+        }
+
+        .profile-menu {
+          padding: 15px;
+        }
+      }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <div class="logo">
+                <img src="../image/logo.png" alt="Logo" /> <!-- Add your logo path -->
+            </div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <div class="profile-container">
+                <!-- Profile Button -->
+                <button id="profile-btn" class="profile-btn">
+                    <i class="fas fa-user"></i>
+                </button>
+
+                <!-- Profile Menu -->
+                <div id="profile-menu" class="profile-menu">
+                    <!-- Profile Image -->
+                    <div class="profile-image">
+                        <img id="seller-pic" src="../image/amineProfile.jpg" alt="Profile Picture" />
+                    </div>
+
+                    <!-- Seller Info -->
+                    <div class="seller-info">
+                        <p id="full-name">Full Name</p>
+                        <p id="gmail">example@gmail.com</p>
+                    </div>
+
+                    <!-- Menu Links -->
+                    <a href="requests.html"><i class="fas fa-list"></i> My Requests</a>
+                    <div class="logout">
+                        <a href="index.html" ><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const profileBtn = document.getElementById("profile-btn");
+        const profileMenu = document.getElementById("profile-menu");
+
+        profileBtn.addEventListener("click", () => {
+          profileMenu.classList.toggle("show");
+
+          // Fetch user data from server
+          fetch("/user-data")
+            .then((res) => {
+              if (!res.ok) throw new Error("Not connected");
+              return res.json();
+            })
+            .then((user) => {
+              document.getElementById("full-name").textContent = user.username;
+              document.getElementById("gmail").textContent = user.email;
+              document.getElementById("seller-pic").src =
+                user.profilePic || "image/default-avatar.png";
+            })
+            .catch((err) => {
+              console.error("Error:", err);
+              document.getElementById("full-name").textContent = "Guest";
+              document.getElementById("gmail").textContent = "Not connected";
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener("click", (event) => {
+          if (!profileContainer.contains(event.target)) {
+            profileMenu.classList.remove("show");
+          }
+        });
+      });
+    </script>
+</body>
+</html>

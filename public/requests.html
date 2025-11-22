@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Requests</title>
+
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Poppins, Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #f6f2ff;
+    }
+
+    /* ---- SIDEBAR ---- */
+    
+    /* ---- MAIN ---- */
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      padding: 45px 60px;
+      overflow-y: auto;
+    }
+    span {
+      font-size: 18px;
+      color: #4a4a4a;
+      
+    }
+    h1 {
+      font-size: 45px;
+      font-weight: 600;
+      color: #5d4a91;
+      margin-bottom: 25px;
+    }
+
+    .request-header,
+    .request-row {
+      display: grid;
+      grid-template-columns: 160px 280px auto auto 90px;
+      align-items: center;
+      padding: 16px 26px;
+      font-size: 18px;
+    }
+
+    .request-header {
+      font-weight: 600;
+      color: #5c5c5c;
+      margin-bottom: 8px;
+      padding-left: 35px;
+    }
+
+    .request-row {
+      background: #e3d7fa;
+      border-radius: 14px;
+      margin-bottom: 10px;
+    }
+
+    .btn-check {
+      background: #8e70c4;
+      color: white;
+      padding: 9px 17px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 16px;
+      text-align: center;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <div id="sideBar" class="sideBar">
+
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <h1>requests:</h1>
+
+    <div class="request-header">
+      <span>Request ID</span>
+      <span>Customer name</span>
+      <span>Date</span>
+      <span>The condition</span>
+      <span></span>
+    </div>
+
+    <div id="requests-container">
+      <!-- Request rows will be loaded here from the server -->
+    </div>
+    
+    <script>
+      fetch("sideBar.html")
+      .then((res) => res.text()).then((data) => {
+          document.getElementById("sideBar").innerHTML = data;
+        })
+        .catch((error) =>
+          console.error("Erreur lors du chargement du sidebar:", error)
+        );
+        
+      async function loadRequests() {
+        const container = document.getElementById('requests-container');
+        container.innerHTML = '';
+        try {
+          const res = await fetch('/api/requests');
+          if (!res.ok) throw new Error('Network response was not ok');
+          const data = await res.json();
+
+          if (!Array.isArray(data) || data.length === 0) {
+            container.innerHTML = '<p style="color:#5c5c5c">No requests found.</p>';
+            return;
+          }
+
+          data.forEach(r => {
+            const row = document.createElement('div');
+            row.className = 'request-row';
+            const dateStr = r.date ? new Date(r.date).toLocaleDateString() : '';
+            row.innerHTML = `
+              <span>${r.requestId || r._id}</span>
+              <span>${r.name || ''}</span>
+              <span>${dateStr}</span>
+              <span>${r.condition || ''}</span>
+              <span><a href="#" class="btn-check">check</a></span>
+            `;
+            container.appendChild(row);
+          });
+        } catch (err) {
+          console.error('Error loading requests:', err);
+          container.innerHTML = '<p style="color:red">Failed to load requests.</p>';
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', loadRequests);
+    </script>
+    
+  </main>
+</body>
+</html>
